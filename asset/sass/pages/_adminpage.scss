@@ -1,0 +1,44 @@
+.nav__bar{
+    img{
+       height: 100vh; 
+    }
+    padding-left: 0;
+    padding-right:0;
+}
+.nav__bar__right{
+    padding-right: 0;
+    padding-left: 0;
+}
+.header__admin{
+    
+    border-bottom: 1px solid $color-dark-1;
+    .navbar{
+        a{
+            @include styleText($fs-10,$fw-3,$color-dark-1,$ls-3);
+        }
+    }
+    .navbar-button{
+        .btn__add{
+            @include styleButtonIcon($color-white-1,$color-dark-1);
+            &:hover{
+                opacity: 0.75;
+            }
+        }
+        .btn__userWeb{
+            @include styleButtonIcon($color-dark-1,$color-white-1);
+            &:hover{
+                @include styleButtonIcon($color-white-1,$color-dark-1);
+            }
+        }
+    }
+}
+
+.body__admin{
+    .body__admin__button{
+        margin-top: $mg-2;
+    }
+    padding-top: $pd-7;
+    .row__body__2{
+        justify-content: space-evenly;
+    }
+}

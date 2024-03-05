@@ -1,0 +1,85 @@
+.luxe__product {
+    padding: $pd-5 0;
+
+    .luxe__product__top {
+        display: flex;
+        margin-bottom: $pd-10;
+        align-items: center;
+        justify-content: space-between;
+        .luxe__product__heading {
+            h2 {
+                @include styleText($fs-10, $fw-2, $color-dark-1, $ls-4);
+            }
+
+            p {
+                color: $color-dark-2;
+            }
+        }
+    }
+
+    .product__content {
+        a {
+            text-decoration: none;
+        }
+
+        .product__card {
+            margin-bottom: $mg-4;
+
+            &:hover {
+                img {
+                    transform: scale(0.8);
+                }
+
+                border: 1px solid $color-dark-1;
+            }
+
+            .header__card__product {
+                padding: $pd-6 $pd-1;
+                overflow: hidden;
+
+                // padding: $pd-6;
+                img {
+                    width: 100%;
+                    transition: all .5s;
+                }
+            }
+
+            .body__card__product {
+                .body__card__top {
+                    margin-top: $mg-2;
+                    margin-bottom: $mg-5;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    .card__product__name {
+                        @include styleText($fs-7, $fw-3, $color-dark-1, $ls-1);
+                        margin: 0 $mg-0 0 0;
+                    }
+
+                    .card__product__type {
+                        @include styleText($fs-1, $fw-1, $color-dark-5, $ls-1);
+                        margin: 0 $mg-5;
+                        border: 1px solid $color-dark-5;
+                        border-radius: 4px;
+                        padding: 0 $mg-5;
+                    }
+                }
+
+                p {
+                    @include styleText($fs-1, $fw-1, $color-dark-5, $ls-1);
+                    margin-bottom: $mg-0;
+                    margin-left: $mg-0;
+                }
+
+                .card__product__price {
+                    @include styleText($fs-7, $fw-3, $color-dark-1, $ls-1);
+                    margin-top: $mg-5;
+                    margin-bottom: $mg-0;
+                }
+
+            }
+        }
+
+    }
+}

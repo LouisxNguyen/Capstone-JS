@@ -1,0 +1,34 @@
+#carouselExampleIndicators{
+    height: 100vh;
+    .godown__carousel{
+        display: block;
+        position: absolute;
+        bottom: 2%;
+        z-index: 2;
+        color:$color-white-2;
+        font-size: $fs-10;
+        opacity: 0.85;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: goDownAnimation 1.5s linear infinite ;
+    }
+    .carousel-inner{
+        height: 100%;
+    }
+}
+
+@keyframes goDownAnimation {
+    0% {
+        transform: scale(0);
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    70% {
+        transform: translateY(10px)
+    }
+    100%{
+        transform: translateY(-5px);
+    }
+}
