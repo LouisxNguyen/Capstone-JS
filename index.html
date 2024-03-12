@@ -108,144 +108,23 @@
                 <p>We bring all the greatest phones to you.</p>
             </div>
             <div class="luxe__product__fillter">
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Lọc
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">IPhone</a>
-                        <a class="dropdown-item" href="#">Samsung</a>
-                    </div>
+                <div class="form-group">
+                    <select class="form-control" id="typeFillter" onclick="typeFillter()">
+                        <option>Lọc</option>
+                        <option>iPhone</option>
+                        <option>Samsung</option>
+                    </select>
                 </div>
             </div>
         </div>
 
         <div class="product__content">
-            <div class="row">
+            <button style="display: none;" id="close__typeFillter" onclick="closeTypeFillter()"><i class="fa-solid fa-delete-left"></i>
+                <span id="close__nameOfType"></span></button>
+            <span class="loader" id="loader" style="display: none;"></span>
+            <div class="row mt-3" id="product__content__body" >
                 <!-- Card product -->
 
-                <div class="col-12 col-md-6 col-lg-4 product__card">
-                    <a href="#">
-                        <div class="product__card__content">
-                            <div class="header__card__product">
-                                <img src="./asset/img/product1.jpg" alt="">
-                            </div>
-                            <div class="body__card__product">
-                                <div class="body__card__top">
-                                    <h3 class="card__product__name">IPhone 15 Pro Max</h3>
-                                    <h4 class="card__product__type">IPhone</h4>
-                                </div>
-                                <p class="card__product__screen card__details">Màn hình: Screen 68</p>
-                                <p class="card__product__backCam card__details">Camera sau: 2 camera 12 MP</p>
-                                <p class="card__product__frontCam card__details">Camera trước: 7 MP</p>
-                                <p class="card__product__description card__details">Thiết kế mang tính đột phá.</p>
-                                <div>
-                                    <h3 class="card__product__price">$99</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 product__card">
-                    <a href="#">
-                        <div class="header__card__product">
-                            <img src="./asset/img/product2.jpg" alt="">
-                        </div>
-                        <div class="body__card__product">
-                            <div class="body__card__top">
-                                <h3 class="card__product__name">IPhone 14 Pro Max</h3>
-                                <h4 class="card__product__type">IPhone</h4>
-                            </div>
-                            <p class="card__product__screen card__details">Màn hình: Screen 68</p>
-                            <p class="card__product__backCam card__details">Camera sau: 2 camera 12 MP</p>
-                            <p class="card__product__frontCam card__details">Camera trước: 7 MP</p>
-                            <p class="card__product__description card__details">Thiết kế mang tính đột phá.</p>
-                            <div>
-                                <h3 class="card__product__price">$99</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 product__card">
-                    <a href="#">
-                        <div class="header__card__product">
-                            <img src="./asset/img/product3.jpg" alt="">
-                        </div>
-                        <div class="body__card__product">
-                            <div class="body__card__top">
-                                <h3 class="card__product__name">IPhone 12</h3>
-                                <h4 class="card__product__type">IPhone</h4>
-                            </div>
-                            <p class="card__product__screen card__details">Màn hình: Screen 68</p>
-                            <p class="card__product__backCam card__details">Camera sau: 2 camera 12 MP</p>
-                            <p class="card__product__frontCam card__details">Camera trước: 7 MP</p>
-                            <p class="card__product__description card__details">Thiết kế mang tính đột phá.</p>
-                            <div>
-                                <h3 class="card__product__price">$99</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 product__card">
-                    <a href="#">
-                        <div class="header__card__product">
-                            <img src="./asset/img/product4.jpg" alt="">
-                        </div>
-                        <div class="body__card__product">
-                            <div class="body__card__top">
-                                <h3 class="card__product__name">Samsung Galaxy S24+</h3>
-                                <h4 class="card__product__type">Samsung</h4>
-                            </div>
-                            <p class="card__product__screen card__details">Màn hình: Screen 68</p>
-                            <p class="card__product__backCam card__details">Camera sau: 2 camera 12 MP</p>
-                            <p class="card__product__frontCam card__details">Camera trước: 7 MP</p>
-                            <p class="card__product__description card__details">Thiết kế mang tính đột phá.</p>
-                            <div>
-                                <h3 class="card__product__price">$99</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 product__card">
-                    <a href="#">
-                        <div class="header__card__product">
-                            <img src="./asset/img/product5.jpg" alt="">
-                        </div>
-                        <div class="body__card__product">
-                            <div class="body__card__top">
-                                <h3 class="card__product__name">Samsung Galaxy S24 Ultra</h3>
-                                <h4 class="card__product__type">Samsung</h4>
-                            </div>
-                            <p class="card__product__screen card__details">Màn hình: Screen 68</p>
-                            <p class="card__product__backCam card__details">Camera sau: 2 camera 12 MP</p>
-                            <p class="card__product__frontCam card__details">Camera trước: 7 MP</p>
-                            <p class="card__product__description card__details">Thiết kế mang tính đột phá.</p>
-                            <div>
-                                <h3 class="card__product__price">$99</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 product__card">
-                    <a href="#">
-                        <div class="header__card__product">
-                            <img src="./asset/img/product6.jpg" alt="">
-                        </div>
-                        <div class="body__card__product">
-                            <div class="body__card__top">
-                                <h3 class="card__product__name">Samsung Galaxy Z-Fold 5</h3>
-                                <h4 class="card__product__type">Samsung</h4>
-                            </div>
-
-                            <p class="card__product__screen card__details">Màn hình: Screen 68</p>
-                            <p class="card__product__backCam card__details">Camera sau: 2 camera 12 MP</p>
-                            <p class="card__product__frontCam card__details">Camera trước: 7 MP</p>
-                            <p class="card__product__description card__details">Thiết kế mang tính đột phá.</p>
-                            <h3 class="card__product__price">$99</h3>
-                        </div>
-                </div>
-                </a>
             </div>
 
         </div>
@@ -264,6 +143,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+        integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Main JS -->
+    <script src="./customer/model/product.js"></script>
+    <script src="./customer/services/api.js"></script>
+    <script src="./customer/model/product.js"></script>
+    <script src="./customer/model/cart.js"></script>
+    <script src="./customer/controller/index.js"></script>
 </body>
 
 </html>
