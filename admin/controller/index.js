@@ -64,6 +64,7 @@ domID("btn__Add").onclick = function () {
     domID("modal-footer").innerHTML = `<button class="btn btn-dark" onclick="addNew()">Add New +</button>`;
 }
 
+const validation = new Validation();
 function getInputInfo() {
 
     const name = domID("productNameForm").value;
@@ -74,7 +75,7 @@ function getInputInfo() {
     const img = domID("imgForm").value;
     const desc = domID("descForm").value;
     const type = domID("typeForm").value;
-
+    let isValid = false;
     // Product Name
     isValid &=
         validation.isNullOrEmpty(name, "spanName", "(*) Vui lòng nhập dữ liệu.") &&
@@ -127,9 +128,11 @@ function getInputInfo() {
         );
 
     // type
-    validation.isNullOrEmpty(type, "spanTypeForm", "(*) Vui lòng nhập dữ liệu.");
+    isValid &= validation.isNullOrEmpty(type, "spanTypeForm", "(*) Vui lòng nhập dữ liệu.");
 
-    if (!isValid) return null;
+    if (!isValid) {
+        return null;
+    }
 
     const product = new ProductLuxe("", name, price, screen, backCamera, frontCamera, img, desc, type,);
     return product;
@@ -137,6 +140,9 @@ function getInputInfo() {
 
 function addNew() {
     const product = getInputInfo();
+    if (!product) {
+        return;
+    } 
     const promise = api.addNewProduct(product);
     //Quá trình xử lý bất đồng bộ
     promise
@@ -177,6 +183,9 @@ function editProduct(id) {
 
 function updateProduct(id) {
     const product = getInputInfo();
+    if (!product) {
+        return;
+    }
     const promise = api.updateProduct(product);
     //Quá trình xử lý bất đồng bộ
     promise
