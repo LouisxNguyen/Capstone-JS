@@ -59,7 +59,7 @@
                     </ul>
                     <form class="form-inline my-2 my-lg-0 form__header">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-secondary my-2 my-sm-0 mr-1 btn__cart__header" type="button"><i
+                        <button id="btnCart" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-secondary my-2 my-sm-0 mr-1 btn__cart__header" type="button"><i
                                 class="fa-solid fa-basket-shopping"></i></button>
                         <button class="btn btn-outline-secondary my-2 my-sm-0 ml-1 btn__fav__header" type="button"><i
                                 class="fa-solid fa-heart"></i></button>
@@ -131,7 +131,38 @@
         </div>
 
     </section>
-
+    <!-- MODAL -->
+    <section>
+        <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                  <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody__CartProduct" ></tbody>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </section>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

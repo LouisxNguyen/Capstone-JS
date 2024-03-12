@@ -89,8 +89,6 @@ function closeTypeFillter(){
     getApiInfoProduct();
 }
 
-
-
 const cartLuxe = new CartClass();
 // ADD PRODUCT TO CART
 function addToCart(id) {
@@ -98,13 +96,34 @@ function addToCart(id) {
     promise
         .then(function (dataProduct) {
             let product = dataProduct.data;
-            let productAdded = new ProductLuxe(product.id, product.name, product.price, product.type);
-            let newQuantity = productAdded.checkQuantity(product.id);
-            cartLuxe.addToCart(productAdded, newQuantity);
-            console.log('cartLuxe:',cartLuxe.productList);
-           
+            let productAdded = new ProductLuxe(product.id, product.name, product.price, product.type, product.img);
+            // let newQuantity = productAdded.checkQuantity(product.id);
+            // cartLuxe.addToCart(productAdded, newQuantity);
+            cartLuxe.addProduct(productAdded);
+            // console.log('cartLuxe:',cartLuxe.productList);
         })
         .catch(function (error) {
             console.log(error)
         })
+}
+// console.log('cartLuxe2:',cartLuxe.productList)
+
+domID("btnCart").onclick = function renderCart(){
+    let content = '';
+    cartLuxe.productList.forEach(function(product){
+        content += `
+        <tr>
+            <td >${product.name}</td>
+            <td>${product.price}</td>
+            <td >
+            <button class="btn__MinusQuan"><i class="fa-solid fa-minus"></i></button>
+            <span style="font-size: 18px; padding: 0 4px;">${product.quantity}</span>
+            <button class="btn__PlusQuan"><i class="fa-solid fa-plus"></i></button>
+            </td>
+            <td>
+            <img style="width: 50px; height: 50px; " src="./asset/img/${product.img}"></td>
+        </tr>
+        `
+    })
+    domID("tbody__CartProduct").innerHTML = content;
 }

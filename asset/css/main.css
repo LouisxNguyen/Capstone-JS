@@ -299,6 +299,15 @@ header {
   background-color: #0D1F2D;
 }
 
+#tbody__CartProduct .btn__MinusQuan, #tbody__CartProduct .btn__PlusQuan {
+  width: 20px;
+  height: 20px;
+  line-height: 12px;
+  border-radius: 50%;
+  border: 1px solid #0D1F2D;
+  font-size: 12px;
+}
+
 .nav__bar {
   padding-left: 0;
   padding-right: 0;
