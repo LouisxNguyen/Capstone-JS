@@ -1,6 +1,7 @@
 function domID(id) {
     return document.getElementById(id);
 }
+
 const api = new Api();
 
 // LẤY THÔNG TIN SẢN PHẨM TỬ SERVER TRẢ VỀ
@@ -83,13 +84,15 @@ function typeFillter() {
         })
 }
 // CLOSE TYPE FILLTER 
-function closeTypeFillter(){
+function closeTypeFillter() {
     domID("typeFillter").value = 'Lọc';
     domID("close__typeFillter").style.display = 'none';
     getApiInfoProduct();
 }
 
 const cartLuxe = new CartClass();
+getLocalStorage();
+
 // ADD PRODUCT TO CART
 function addToCart(id) {
     const promise = api.getDetailApi(id);
@@ -100,30 +103,101 @@ function addToCart(id) {
             // let newQuantity = productAdded.checkQuantity(product.id);
             // cartLuxe.addToCart(productAdded, newQuantity);
             cartLuxe.addProduct(productAdded);
+            console.log('cartLuxe:', cartLuxe.productList);
+            setLocalStorage(cartLuxe.productList);
             // console.log('cartLuxe:',cartLuxe.productList);
         })
         .catch(function (error) {
             console.log(error)
         })
 }
-// console.log('cartLuxe2:',cartLuxe.productList)
 
-domID("btnCart").onclick = function renderCart(){
+function renderCart() {
     let content = '';
-    cartLuxe.productList.forEach(function(product){
+    cartLuxe.productList.forEach(function (product) {
         content += `
         <tr>
             <td >${product.name}</td>
             <td>${product.price}</td>
             <td >
-            <button class="btn__MinusQuan"><i class="fa-solid fa-minus"></i></button>
-            <span style="font-size: 18px; padding: 0 4px;">${product.quantity}</span>
-            <button class="btn__PlusQuan"><i class="fa-solid fa-plus"></i></button>
+                <div style="display: flex;align-items: center;">
+                    <button id="btnMinus__${product.id}" class="btn__MinusQuan" onclick="changeNumber('${product.id}', false)"><i class="fa-solid fa-minus"></i></button>
+                    <span id="spanNumber__${product.id}" style="font-size: 20px;padding: 0 4px;">${product.quantity}</span>
+                    <button class="btn__PlusQuan" onclick="changeNumber('${product.id}', true)"><i class="fa-solid fa-plus"></i></button>
+                </div>
             </td>
             <td>
-            <img style="width: 50px; height: 50px; " src="./asset/img/${product.img}"></td>
+                <img style="width: 50px; height: 50px; margin: 10px 0" src="./asset/img/${product.img}">
+            </td>
+            <td style="width: 5%">
+                <button style="width: 100%" class="btn btn-danger" onclick="delProductOfCart('${product.id}')">Xoá</button>
+            </td>
         </tr>
         `
     })
     domID("tbody__CartProduct").innerHTML = content;
+}
+domID("btnCart").onclick = renderCart;
+
+function delProductOfCart(id) {
+    let index = -1;
+    cartLuxe.productList.forEach(function (item, indexOfPrd) {
+        if (item.id === id) {
+            index = indexOfPrd;
+        }
+    });
+
+    if(index !== -1 ) {
+        cartLuxe.productList.splice(index, 1);
+        setLocalStorage(cartLuxe.productList);
+        renderCart();
+    }
+}
+
+function changeNumber(id, isPlus) {
+    let numberUpdated = 0;
+    const number = Number(domID(`spanNumber__${id}`).innerHTML);
+    if (!isPlus) {
+        numberUpdated = number - 1;
+        if (numberUpdated == 0) {
+            domID(`btnMinus__${id}`).disabled = true;
+        }
+
+    } else {
+        domID(`btnMinus__${id}`).disabled = false;
+        numberUpdated = number + 1;
+    }
+
+    domID(`spanNumber__${id}`).innerHTML = numberUpdated;
+    updateNumberProduct(id, numberUpdated);
+
+}
+
+function updateNumberProduct(id, number) {
+    cartLuxe.productList.forEach(function (product) {
+        if (product.id === id) {
+            product.quantity = number;
+        }
+    });
+
+    setLocalStorage(cartLuxe.productList);
+}
+
+domID("btnPay").onclick = function () {
+    cartLuxe.productList = [];
+    setLocalStorage([]);
+    domID("md__close").click();
+}
+
+function setLocalStorage(products) {
+    const prdString = JSON.stringify(products);
+    localStorage.setItem("CartProduct", prdString);
+}
+
+function getLocalStorage() {
+    if (!localStorage.getItem("CartProduct")) return;
+
+    const prdString = localStorage.getItem("CartProduct");
+    const prdArray = JSON.parse(prdString);
+    cartLuxe.productList = prdArray;
 }
