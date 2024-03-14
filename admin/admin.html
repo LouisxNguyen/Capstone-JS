@@ -54,48 +54,41 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="form-group">
-                                            <label for="productNameForm">Product Name:</label>
+                                            <label for="exampleFormControlInput1">Product Name:</label>
                                             <input type="text" class="form-control" id="productNameForm">
-                                            <span class="text-danger font-weight-bold" id="spanName"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="priceForm">Price:</label>
+                                            <label for="exampleFormControlInput1">Price:</label>
                                             <input type="text" class="form-control" id="priceForm">
-                                            <span class="text-danger font-weight-bold" id="spanPrice"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="screenForm">Screen:</label>
+                                            <label for="exampleFormControlInput1">Screen:</label>
                                             <input type="text" class="form-control" id="screenForm">
-                                            <span class="text-danger font-weight-bold" id="spanScreen"></span>
                                         </div>
                                         <div class="form-row form-group">
                                             <div class="col">
-                                                <label for="backCamForm">Back Camera:</label>
+                                                <label for="exampleFormControlInput1">Back Camera:</label>
                                                 <input type="text" class="form-control" id="backCamForm">
-                                                <span class="text-danger font-weight-bold" id="spanBackCam"></span>
                                             </div>
                                             <div class="col">
-                                                <label for="frontCamForm">Front Camera:</label>
+                                                <label for="exampleFormControlInput1">Front Camera:</label>
                                                 <input type="text" class="form-control" id="frontCamForm">
-                                                <span class="text-danger font-weight-bold" id="spanFrontCam"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="imgForm">Image Name:</label>
+                                            <label for="exampleFormControlInput1">Image Name:</label>
                                             <input type="text" class="form-control" id="imgForm">
-                                            <span class="text-danger font-weight-bold" id="spanImgForm"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="typeForm">Type:</label>
+                                            <label for="exampleFormControlSelect1">Type:</label>
                                             <select class="form-control" id="typeForm">
                                                 <option>iPhone</option>
                                                 <option>Samsung</option>
                                             </select>
-                                            <span class="text-danger font-weight-bold" id="spanTypeForm"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="descForm">Description</label>
+                                            <label for="exampleFormControlTextarea1">Description</label>
                                             <textarea class="form-control" id="descForm" rows="3"></textarea>
                                         </div>
                                     </form>
@@ -116,14 +109,14 @@
                     </div>
                     <div class="row body__admin__button">
                         <div class="col-6">
-                            <input id="txtSearch" class="form-control" type="text" placeholder="Tìm kiếm sản phẩm">
+                            <input class="form-control" type="text" placeholder="Tìm kiếm sản phẩm">
                         </div>
                         <div class="col-6">
                             <div class="row__body__2">
-                                <button class="btn btn-outline-secondary w-100 col-4" onclick = "sortProducts('ASC')">
+                                <button class="btn btn-outline-secondary w-100 col-4">
                                     <i class="fa-solid fa-up-long"></i>
                                     Sắp xếp tăng dần</button>
-                                <button class="btn btn-outline-secondary w-100 col-4" onclick = "sortProducts('DES')">
+                                <button class="btn btn-outline-secondary w-100 col-4">
                                     <i class="fa-solid fa-down-long"></i>
                                     Sắp xếp giảm dần</button>
                             </div>
@@ -167,7 +160,6 @@
 
     <script src="./model/product.js"></script>
     <script src="./services/api.js"></script>
-    <script src="./controller/validation.js"></script>
     <script src="./controller/index.js"></script>
 </body>
 
