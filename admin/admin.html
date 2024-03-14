@@ -38,7 +38,10 @@
                             data-target="#addModal">
                             <i class="fa-solid fa-plus"></i>
                             Add Product</button>
-                        <button class="btn btn-outline-secondary btn__userWeb">User Website</button>
+                        <a href="../index.html" style="display: inline-block;"><button class="btn btn-outline-secondary btn__userWeb">
+                            User Website
+                            </button></a>
+                            
                     </div>
                     <!-- MODAL OF ADD PRODUCT BUTTON -->
                     <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
@@ -109,14 +112,14 @@
                     </div>
                     <div class="row body__admin__button">
                         <div class="col-6">
-                            <input class="form-control" type="text" placeholder="Tìm kiếm sản phẩm">
+                            <input class="form-control" type="text" placeholder="Tìm kiếm sản phẩm" id="searchProduct">
                         </div>
                         <div class="col-6">
                             <div class="row__body__2">
-                                <button class="btn btn-outline-secondary w-100 col-4">
+                                <button id="btn__TangDan" class="btn btn-outline-secondary w-100 col-4">
                                     <i class="fa-solid fa-up-long"></i>
                                     Sắp xếp tăng dần</button>
-                                <button class="btn btn-outline-secondary w-100 col-4">
+                                <button id="btn__GiamDan" class="btn btn-outline-secondary w-100 col-4">
                                     <i class="fa-solid fa-down-long"></i>
                                     Sắp xếp giảm dần</button>
                             </div>
@@ -160,6 +163,7 @@
 
     <script src="./model/product.js"></script>
     <script src="./services/api.js"></script>
+    <script src="./model/pageFunction.js"></script>
     <script src="./controller/index.js"></script>
 </body>
 

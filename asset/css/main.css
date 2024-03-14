@@ -324,11 +324,16 @@ header {
 .header__admin {
   border-bottom: 1px solid #0D1F2D;
 }
-.header__admin .navbar a {
+.header__admin .navbar .navbar-brand {
   font-size: 32px;
   font-weight: 700;
   color: #0D1F2D;
   letter-spacing: 0.3rem;
+}
+.header__admin .navbar-button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 .header__admin .navbar-button .btn__add {
   color: #FFFFFF;

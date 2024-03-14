@@ -1,8 +1,21 @@
+//GLOBAL
 function domID(id) {
     return document.getElementById(id);
 }
-const api = new Api();
 
+
+
+
+// TẠO ĐỊNH DẠNG CHO GIÁ TIỀN
+const formatVnd = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+});
+//GLOBAL-----------------------------
+
+
+// CHAPTER I: XỬ LÝ NGHIỆP VỤ CHO SẢN PHẨM LẤY TỪ SERVER VỀ
+const api = new Api();
 // LẤY THÔNG TIN SẢN PHẨM TỬ SERVER TRẢ VỀ
 function getApiInfoProduct() {
     const promise = api.getApi();
@@ -10,6 +23,8 @@ function getApiInfoProduct() {
     promise
         .then(function (dataProduct) {
             renderInfo(dataProduct.data);
+            //HÀM LẤY DỮ LIỆU TỪ LOCALSTORAGE LÊN 
+            getLocalStorage();
             domID("loader").style.display = 'none'
         })
         .catch(function (error) {
@@ -19,12 +34,11 @@ function getApiInfoProduct() {
 }
 getApiInfoProduct();
 
+
+
 // ĐƯA SẢN PHẨM LÊN BROWSER
 function renderInfo(listProduct) {
-    const formatVnd = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-    });
+    
     let content = ``;
     listProduct.forEach(function (product) {
         content += `
@@ -89,41 +103,100 @@ function closeTypeFillter(){
     getApiInfoProduct();
 }
 
+//CHAPTER I: ----------------------------------------------------------------------------
+
+//CHAPTER II: XỬ LÝ NGHIỆP VỤ CHO CART
 const cartLuxe = new CartClass();
 // ADD PRODUCT TO CART
 function addToCart(id) {
+    domID("btnCart").style.border = '1px solid red';
+    domID("btnCart").style.color = 'red';
     const promise = api.getDetailApi(id);
     promise
         .then(function (dataProduct) {
             let product = dataProduct.data;
             let productAdded = new ProductLuxe(product.id, product.name, product.price, product.type, product.img);
-            // let newQuantity = productAdded.checkQuantity(product.id);
-            // cartLuxe.addToCart(productAdded, newQuantity);
             cartLuxe.addProduct(productAdded);
-            // console.log('cartLuxe:',cartLuxe.productList);
+            setLocalStorage()
         })
         .catch(function (error) {
             console.log(error)
         })
 }
-// console.log('cartLuxe2:',cartLuxe.productList)
 
-domID("btnCart").onclick = function renderCart(){
+
+// HÀM RENDER MODAL SAU KHI ADD SẢN PHẨM VÀO GIỎ HÀNG
+function renderCart (listProduct){
     let content = '';
-    cartLuxe.productList.forEach(function(product){
+    listProduct.forEach(function(product){
         content += `
         <tr>
             <td >${product.name}</td>
-            <td>${product.price}</td>
+            <td>${formatVnd.format(product.price)}</td>
             <td >
-            <button class="btn__MinusQuan"><i class="fa-solid fa-minus"></i></button>
-            <span style="font-size: 18px; padding: 0 4px;">${product.quantity}</span>
-            <button class="btn__PlusQuan"><i class="fa-solid fa-plus"></i></button>
+            <button id="btn__MinusQuan" class="btn__MinusQuan" onclick="changeQuantity(${product.id}, ${-1})"><i class="fa-solid fa-minus"></i></button>
+            <span id="pdCart__Quantity" style="font-size: 18px; padding: 0 4px;">${product.quantity}</span>
+            <button class="btn__PlusQuan" onclick="changeQuantity(${product.id}, ${1})"><i class="fa-solid fa-plus"></i></button>
             </td>
             <td>
             <img style="width: 50px; height: 50px; " src="./asset/img/${product.img}"></td>
+            <td><button class="btn btn-link" style="color: black;" onclick="deleteProductInCart(${product.id})">Xoá</button></td>
         </tr>
         `
     })
     domID("tbody__CartProduct").innerHTML = content;
 }
+
+// SHOW MODAL OF CART WHEN USER OPEN CART
+domID("btnCart").onclick = function (){
+    domID("exampleModalLabel").innerHTML = 'YOUR CART';
+    renderCart (cartLuxe.productList);
+    totalPriceCart();
+}
+
+// CHANGE NUMBER OF PRODUCT IN CART
+function changeQuantity (id, count){
+    const newCart = cartLuxe.changeQuantityCart(id, count);
+    renderCart (newCart);
+    totalPriceCart();
+    setLocalStorage()
+}
+
+// TOTAL PRICE
+function totalPriceCart(){
+    const total = cartLuxe.totalPrice();
+    console.log('total:',total)
+    domID("total__CartProduct").innerHTML = formatVnd.format(total);
+    setLocalStorage()
+} 
+
+// DELETE PRODUCT IN CART 
+function deleteProductInCart(id){
+    const newCart = cartLuxe.deleteProduct(id);
+    renderCart (newCart);
+    totalPriceCart();
+    setLocalStorage()
+}
+
+domID("btn__CheckOut").onclick = function (){
+    const newCart = cartLuxe.clearCart();
+    renderCart (newCart);
+    totalPriceCart();
+}
+//CHAPTER II: -----------------------------------------------------------------
+
+
+// Set localStorage
+function setLocalStorage(){
+    const arrString = JSON.stringify(cartLuxe.productList);
+    localStorage.setItem('Cart', arrString);
+}
+
+function getLocalStorage(){
+    const arrString = localStorage.getItem('Cart');
+    const arrJSON = JSON.parse(arrString);
+    
+    cartLuxe.productList = arrJSON;
+    renderCart (cartLuxe.productList);
+}
+// Set localstorage ---------------------------------------------

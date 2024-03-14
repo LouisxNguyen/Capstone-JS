@@ -13,11 +13,14 @@
     
     border-bottom: 1px solid $color-dark-1;
     .navbar{
-        a{
+        .navbar-brand{
             @include styleText($fs-10,$fw-3,$color-dark-1,$ls-3);
         }
     }
     .navbar-button{
+        display: flex;
+        align-items: center;
+        gap: .25rem;
         .btn__add{
             @include styleButtonIcon($color-white-1,$color-dark-1);
             &:hover{

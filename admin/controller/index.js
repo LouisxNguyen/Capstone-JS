@@ -2,6 +2,10 @@
 function domID(id) {
     return document.getElementById(id);
 }
+const formatVnd = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+});
 // Tạo đối tượng API 
 const api = new LuxeAPI();
 
@@ -14,6 +18,7 @@ function getProduct() {
             //Website chờ tới khi lấy được thông tin từ Sever
             //mới thực hiện hàm render
             renderProduct(product.data)
+            setLocalStorage (product.data);
         })
         .catch(function (error) {
             console.log(error)
@@ -29,7 +34,7 @@ function renderProduct(productList) {
         <tr>
             <td>${index + 1}</td>
             <td style="font-weight:bold;">${product.name}</td>
-            <td>${product.price} VNĐ</td>
+            <td>${formatVnd.format(product.price)}</td>
             <td style="font-style:italic;">${product.type}</td>
             <td>
             <img src="../../asset/img/${product.img}" width="70">
@@ -55,6 +60,7 @@ function delProduct(id) {
             //thì gọi lại hàm getProduct()- để lấy danh sách SP mới và
             // chạy lại renderProduct (product.data) để cập nhật ra browser
             getProduct();
+            
         })
         .catch(function (error) {
             console.log(error)
@@ -151,3 +157,44 @@ function clearInfo(){
     domID("descForm").value="";
     domID("typeForm").value="";
 }
+
+// SẮP XẾP TĂNG DẦN
+domID("btn__TangDan").onclick = function(){
+    let arr = getLocalStorage();
+    let newArr = [];
+    arr.forEach(function(product){
+        newArr = arr.sort(product.price, );
+    })
+    console.log(newArr)
+}
+
+// SEARCH
+domID("searchProduct").addEventListener('keyup', function(){
+    let searchText = domID("searchProduct").value.toLowerCase();
+    let newSearchArr = getLocalStorage();
+    let searchArr = [];
+    newSearchArr.forEach(function(product){
+        let typeTest = product.name.toLowerCase();
+        if(typeTest.indexOf(searchText) !== -1){
+            searchArr.push(product)
+        }
+    })
+    renderProduct(searchArr);
+})
+
+
+
+function setLocalStorage (productList){
+    const arrString = JSON.stringify(productList);
+    localStorage.setItem('listProduct',arrString);
+}
+function getLocalStorage (){
+    let searchArr = [];
+    const arrString = localStorage.getItem('listProduct');
+    const arrJson = JSON.parse(arrString);
+    
+    searchArr = arrJson;
+    renderProduct(searchArr)
+    return searchArr;
+}
+getLocalStorage ()
