@@ -138,6 +138,9 @@ header {
   color: #FFFFFF;
   background-color: #0D1F2D;
 }
+.luxe__header .navbar .form__header .btn__fav__header:hover a {
+  color: white !important;
+}
 
 #carouselExampleIndicators {
   height: 100vh;

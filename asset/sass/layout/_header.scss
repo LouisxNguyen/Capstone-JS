@@ -1,22 +1,27 @@
 // HEADER
-header{
+header {
     position: fixed;
     width: 100%;
     z-index: 10;
-    background-color:   $color-white-1;
+    background-color: $color-white-1;
     box-shadow: 0 2px 4px $color-white-2;
 }
-.luxe__header{
-    padding:  0;
-    .navbar{
+
+.luxe__header {
+    padding: 0;
+
+    .navbar {
         padding: $pd-6 0;
-        .navbar-brand{
-            @include styleText($fs-10,$fw-3,$color-dark-1,$ls-3)
+
+        .navbar-brand {
+            @include styleText($fs-10, $fw-3, $color-dark-1, $ls-3)
         }
-        .navbar-nav{
-            .nav-item{
+
+        .navbar-nav {
+            .nav-item {
                 margin: 0 $mg-5;
-                &::after{
+
+                &::after {
                     content: "";
                     transform: scale(0);
                     display: block;
@@ -25,8 +30,9 @@ header{
                     background-color: $color-dark-1;
                     transition: all 0.5s;
                 }
-                &:hover{
-                    &::after{
+
+                &:hover {
+                    &::after {
                         content: "";
                         transform: scale(1);
                         display: block;
@@ -36,26 +42,38 @@ header{
                     }
                 }
             }
-            .nav-item a{
-                @include styleText($fs-11,$fw-2,$color-black-0,$ls-2)
-            } 
+
+            .nav-item a {
+                @include styleText($fs-11, $fw-2, $color-black-0, $ls-2)
+            }
         }
-        .form__header{
-            .btn__cart__header{
-                @include styleButtonIcon($color-dark-1,$color-white-1);
-                &:hover{
+
+        .form__header {
+
+            .btn__cart__header {
+                @include styleButtonIcon($color-dark-1, $color-white-1);
+
+                &:hover {
                     color: $color-white-1;
                     background-color: $color-dark-1;
                 }
             }
-            .btn__fav__header{
-                @include styleButtonIcon($color-dark-1,$color-white-1);
-                &:hover{
+
+            .btn__fav__header {
+
+
+                @include styleButtonIcon($color-dark-1, $color-white-1);
+
+                &:hover {
                     color: $color-white-1;
                     background-color: $color-dark-1;
+
+                    a {
+                        color: white !important; 
+                    }
                 }
             }
         }
     }
-    
+
 }
