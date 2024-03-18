@@ -68,6 +68,7 @@ function delProduct(id) {
 }
 
 domID("btn__Add").onclick = function () {
+    clearInfo();
     domID("luxeModalLabel").innerHTML = "Add New Product";
     domID("modal-footer").innerHTML = `<button class="btn btn-dark" onclick="getInputInfo()">Add New +</button>`;
 }
