@@ -159,14 +159,37 @@ function clearInfo(){
 }
 
 // SẮP XẾP TĂNG DẦN
-domID("btn__TangDan").onclick = function(){
+function priceFilter (condition){
     let arr = getLocalStorage();
     let newArr = [];
-    arr.forEach(function(product){
-        newArr = arr.sort(product.price, );
-    })
-    console.log(newArr)
+    newArr = arr.sort(function(product, productAfter){
+        if(condition === 'up'){
+            return product.price - productAfter.price;
+        }
+        else{
+            return productAfter.price - product.price;
+        }
+    });
+    renderProduct(newArr)
 }
+
+// domID("btn__TangDan").onclick = function(){
+//     let arr = getLocalStorage();
+//     let newArr = [];
+//     newArr = arr.sort(function(product, productAfter){
+//         return product.price - productAfter.price;
+//     });
+//     renderProduct(newArr)
+// }
+
+// domID("btn__GiamDan").onclick = function(){
+//     let arr = getLocalStorage();
+//     let newArr = [];
+//     newArr = arr.sort(function(product, productAfter){
+//         return productAfter.price - product.price;
+//     });
+//     renderProduct(newArr)
+// }
 
 // SEARCH
 domID("searchProduct").addEventListener('keyup', function(){
