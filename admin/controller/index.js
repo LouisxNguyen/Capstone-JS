@@ -72,8 +72,8 @@ domID("btn__Add").onclick = function () {
     domID("modal-footer").innerHTML = `<button class="btn btn-dark" onclick="getInputInfo()">Add New +</button>`;
 }
 
+const validation = new Validation();
 function getInputInfo() {
-    
     const name = domID("productNameForm").value;
     const price = domID("priceForm").value;
     const screen = domID("screenForm").value;
@@ -83,8 +83,73 @@ function getInputInfo() {
     const desc = domID("descForm").value;
     const type = domID("typeForm").value;
 
-    const product = new ProductLuxe("", name, price, screen, backCamera, frontCamera, img, desc, type,);
+    let isValid = false;
+    // Product Name
+    isValid &=
+        validation.isNullOrEmpty(name, "spanName", "(*) Vui lòng nhập dữ liệu.") &&
+        validation.isLetter(
+            name,
+            "spanName",
+            "(*) Vui lòng nhập chuỗi kí tự"
+        );
 
+    // Price
+    isValid &=
+        validation.isNullOrEmpty(price, "spanPrice", "(*) Vui lòng nhập dữ liệu.") &&
+        validation.isNumber(price, "spanPrice", "(*) Vui lòng nhập số.");
+
+
+    // screen
+    isValid &=
+        validation.isNullOrEmpty(screen, "spanScreen", "(*) Vui lòng nhập dữ liệu.") &&
+        validation.isNumberAndLetter(
+            screen,
+            "spanScreen",
+            "(*) Vui lòng nhập chữ hoặc số."
+        );
+
+    // backCamera
+    isValid &=
+        validation.isNullOrEmpty(backCamera, "spanBackCam", "(*) Vui lòng nhập dữ liệu.") &&
+        validation.isNumberAndLetter(
+            backCamera,
+            "spanBackCam",
+            "(*) Vui lòng nhập chữ hoặc số."
+        );
+
+    // frontCamera
+    isValid &=
+        validation.isNullOrEmpty(frontCamera, "spanFrontCam", "(*) Vui lòng nhập dữ liệu.") &&
+        validation.isNumberAndLetter(
+            frontCamera,
+            "spanFrontCam",
+            "(*) Vui lòng nhập chữ hoặc số."
+        );
+
+    // img
+    isValid &=
+        validation.isNullOrEmpty(img, "spanImgForm", "(*) Vui lòng nhập dữ liệu.") &&
+        validation.isUrlImg(
+            img,
+            "spanImgForm",
+            "(*) Vui lòng nhập đúng định dạng image."
+        );
+
+    // type
+    isValid &= validation.isNullOrEmpty(type, "spanTypeForm", "(*) Vui lòng nhập dữ liệu.");
+
+    if (!isValid) {
+        return null;
+    }
+    const product = new ProductLuxe("", name, price, screen, backCamera, frontCamera, img, desc, type,);
+    return product;
+}
+
+function addNewProduct(){
+    const product = getInputInfo();
+    if (!product) {
+        return;
+    } 
     const promise = api.addNewProduct(product);
     //Quá trình xử lý bất đồng bộ
     promise
@@ -100,6 +165,7 @@ function getInputInfo() {
             console.log(error)
         })
 }
+
 
 function editProduct(id) {
     domID("luxeModalLabel").innerHTML = "Edit Product";
@@ -172,24 +238,6 @@ function priceFilter (condition){
     });
     renderProduct(newArr)
 }
-
-// domID("btn__TangDan").onclick = function(){
-//     let arr = getLocalStorage();
-//     let newArr = [];
-//     newArr = arr.sort(function(product, productAfter){
-//         return product.price - productAfter.price;
-//     });
-//     renderProduct(newArr)
-// }
-
-// domID("btn__GiamDan").onclick = function(){
-//     let arr = getLocalStorage();
-//     let newArr = [];
-//     newArr = arr.sort(function(product, productAfter){
-//         return productAfter.price - product.price;
-//     });
-//     renderProduct(newArr)
-// }
 
 // SEARCH
 domID("searchProduct").addEventListener('keyup', function(){
