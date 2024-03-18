@@ -58,27 +58,4 @@ function Validation() {
         return false;
     };
 
-    this.isEmail = function (value, spanId, mess) {
-        const pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-        if (value.match(pattern)) {
-            domID(spanId).innerHTML = "";
-            return true;
-        }
-
-        domID(spanId).innerHTML = mess;
-        return false;
-    };
-
-    this.isUrlImg = function(value, spanId, message) {
-        const pattern = /\/\/(\S+?(?:jpe?g|png|gif))/ig;
-
-        if (value.match(pattern)) {
-            domID(spanId).innerHTML = "";
-            return true;
-        }
-
-        domID(spanId).innerHTML = message;
-        return false;
-    }
 }
